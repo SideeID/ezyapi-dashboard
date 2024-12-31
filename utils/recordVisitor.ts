@@ -24,8 +24,8 @@ export const recordVisitor = async (): Promise<void> => {
       throw new Error(`Failed to record visitor: ${response.status} - ${JSON.stringify(errorData)}`);
     }
 
-    const data = await response.json();
-    console.log('Visitor recorded successfully:', data);
+    // const data = await response.json();
+    // console.log('Visitor recorded successfully:', data);
   } catch (error) {
     console.error('Error recording visitor:', error);
     throw error;
