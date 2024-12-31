@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart3, Activity, Users, Network } from 'lucide-react';
 import { fetchStatsSummary } from '@/utils/fetchStats';
+import { recordVisitor } from '@/utils/recordVisitor';
 
 const SkeletonCard = () => (
   <Card>
@@ -57,12 +58,13 @@ export const DashboardStats = () => {
     const fetchData = async () => {
       try {
         const response = await fetchStatsSummary();
+        await recordVisitor(); 
         setStats(response.data);
-      } catch {
+      } catch (error) {
+        console.error('Error:', error);
         setError('Failed to load stats');
       }
     };
-
     fetchData();
   }, []);
 
