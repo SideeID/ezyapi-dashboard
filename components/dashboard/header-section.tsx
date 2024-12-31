@@ -30,7 +30,7 @@ export const HeaderSection = () => {
               d='M9 5l7 7-7 7'
             />
           </svg>
-          Limit API: 100
+          Limit API: 150
         </span>
         Requests per menit
       </p>
