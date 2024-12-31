@@ -2,11 +2,8 @@ export const recordVisitor = async (): Promise<void> => {
   try {
     if (typeof window === 'undefined') return;
 
-    const userId = localStorage.getItem('visitorId') || crypto.randomUUID();
-    if (!localStorage.getItem('visitorId')) {
-      localStorage.setItem('visitorId', userId);
-    }
-
+    const userId = crypto.randomUUID();
+    
     const response = await fetch('https://api.sideid.tech/v1/stats/record', {
       method: 'POST',
       headers: {
