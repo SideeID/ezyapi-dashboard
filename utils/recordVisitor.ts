@@ -5,11 +5,14 @@ export const recordVisitor = async (): Promise<void> => {
       localStorage.setItem('visitorId', userId);
     }
 
+    // Tambahkan headers CORS ke request
     const response = await fetch('https://api.sideid.tech/v1/stats/record', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify({
         userId,
         firstVisit: new Date().toISOString(),
@@ -18,6 +21,10 @@ export const recordVisitor = async (): Promise<void> => {
         userAgent: navigator.userAgent,
       }),
     });
+
+    console.log('Response status:', response.status);
+    const responseData = await response.json();
+    console.log('Response data:', responseData);
 
     if (!response.ok) {
       throw new Error('Failed to record visitor');
