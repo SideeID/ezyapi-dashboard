@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { Metadata } from 'next';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -93,23 +92,6 @@ const defaultInputBody = {
       content: 'Halo, apa kabar?',
     },
   ],
-};
-
-export const metadata: Metadata = {
-  title: 'AI Service - SideID API by Dimas Fajar Katon Prayogo',
-  description:
-    'Explore and test various AI models provided by SideID API, created by Dimas Fajar Katon Prayogo. Access state-of-the-art AI capabilities through our free REST API.',
-  openGraph: {
-    title: 'AI Service - SideID API by Dimas Fajar Katon Prayogo',
-    description:
-      "Test and use various AI models through SideID's free REST API service.",
-    url: 'https://ezy.sideid.tech/ai-service',
-  },
-  twitter: {
-    title: 'AI Service - SideID API',
-    description:
-      "Test and use various AI models through SideID's free REST API service.",
-  },
 };
 
 export default function AIServicePage() {
