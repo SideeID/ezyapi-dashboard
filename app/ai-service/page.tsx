@@ -89,7 +89,7 @@ const defaultInputBody = {
     },
     {
       role: 'user',
-      content: 'Halo, apa kabar?',
+      content: 'Halo, apa kabar, kamu siapa?',
     },
   ],
 };
