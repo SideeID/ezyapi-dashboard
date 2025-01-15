@@ -58,7 +58,7 @@ export const DashboardStats = () => {
     const fetchData = async () => {
       try {
         const response = await fetchStatsSummary();
-        await recordVisitor(); 
+        await recordVisitor();
         setStats(response.data);
       } catch (error) {
         console.error('Error:', error);
