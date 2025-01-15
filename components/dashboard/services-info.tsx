@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Select,
@@ -14,16 +15,19 @@ export const ServicesInfo = () => {
       title: 'Artificial Intelligence',
       description: 'Akses beragam macam model AI secara gratis!',
       icon: <Cpu className='h-6 w-6 text-green-500' />,
+      href: '/ai-service',
     },
     {
       title: 'Downloader Universal',
       description: 'Download media dari banyak platform dengan mudah!',
       icon: <CloudDownload className='h-6 w-6 text-blue-500' />,
+      href: '#',
     },
     {
       title: 'Media Uploader',
       description: 'Upload dan simpan media dengan efisien!',
       icon: <CloudUpload className='h-6 w-6 text-purple-500' />,
+      href: '#',
     },
   ];
 
@@ -61,20 +65,19 @@ export const ServicesInfo = () => {
 
       <div className='grid gap-4 sm:grid-cols-2 md:grid-cols-3'>
         {services.map((service, index) => (
-          <Card
-            key={index}
-            className='border border-gray-200 rounded-md shadow-sm hover:shadow-md transition-shadow'
-          >
-            <CardHeader className='flex items-center gap-2'>
-              {service.icon}
-              <CardTitle className='text-sm font-medium text-gray-800'>
-                {service.title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className='text-sm text-gray-600'>{service.description}</p>
-            </CardContent>
-          </Card>
+          <Link href={service.href} key={index}>
+            <Card className='border border-gray-200 rounded-md shadow-sm hover:shadow-md transition-shadow cursor-pointer h-full'>
+              <CardHeader className='flex items-center gap-2'>
+                {service.icon}
+                <CardTitle className='text-sm font-medium text-gray-800'>
+                  {service.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className='text-sm text-gray-600'>{service.description}</p>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>
