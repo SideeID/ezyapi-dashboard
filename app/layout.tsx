@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://ezy.sideid.tech',
     siteName: 'SideID API',
-    title: 'SideID - Free REST API by SideID',
+    title: 'EZY - Free REST API by SideID',
     description:
       'Access free REST API endpoints for AI, media processing, and more, created by Dimas Fajar Katon Prayogo (SideID).',
     images: [
