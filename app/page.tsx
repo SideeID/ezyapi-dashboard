@@ -5,7 +5,7 @@ import Script from 'next/script';
 
 export default function Home() {
   return (
-    <main className='p-8 md:p-10 mx-auto max-w-7xl'>
+    <main className='p-6 md:p-10 mx-auto max-w-7xl'>
       <Script id='structured-data' type='application/ld+json'>
         {JSON.stringify({
           '@context': 'https://schema.org',
@@ -28,7 +28,7 @@ export default function Home() {
           },
         })}
       </Script>
-      <div className='flex flex-col gap-8'>
+      <div className='flex flex-col gap-10'>
         <HeaderSection />
         <DashboardStats />
         <ServicesInfo />
