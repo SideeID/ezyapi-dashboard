@@ -28,7 +28,7 @@ const aiEndpoints = [
     endpoint: 'api.sideid.tech/v1/ai/claude-3.5-haiku',
     method: 'POST',
     category: 'Claude',
-    active: false,
+    active: true,
   },
   {
     title: 'Claude 3 Sonnet',
@@ -42,14 +42,14 @@ const aiEndpoints = [
     endpoint: 'api.sideid.tech/v1/ai/claude-3.5-sonnet',
     method: 'POST',
     category: 'Claude',
-    active: false,
+    active: true,
   },
   {
     title: 'Claude 3 Opus',
     endpoint: 'api.sideid.tech/v1/ai/claude-3-opus',
     method: 'POST',
     category: 'Claude',
-    active: true,
+    active: false,
   },
   {
     title: 'GPT 4o Mini',
@@ -77,7 +77,7 @@ const aiEndpoints = [
     endpoint: 'api.sideid.tech/v1/ai/gemini-1.5-flash',
     method: 'POST',
     category: 'Gemini',
-    active: false,
+    active: true,
   },
 ];
 
