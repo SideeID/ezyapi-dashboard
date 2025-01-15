@@ -21,54 +21,63 @@ const aiEndpoints = [
     endpoint: 'api.sideid.tech/v1/ai/claude-3-haiku',
     method: 'POST',
     category: 'Claude',
+    active: true,
   },
   {
     title: 'Claude 3.5 Haiku',
     endpoint: 'api.sideid.tech/v1/ai/claude-3.5-haiku',
     method: 'POST',
     category: 'Claude',
+    active: false,
   },
   {
     title: 'Claude 3 Sonnet',
     endpoint: 'api.sideid.tech/v1/ai/claude-3-sonnet',
     method: 'POST',
     category: 'Claude',
+    active: true,
   },
   {
     title: 'Claude 3.5 Sonnet',
     endpoint: 'api.sideid.tech/v1/ai/claude-3.5-sonnet',
     method: 'POST',
     category: 'Claude',
+    active: false,
   },
   {
     title: 'Claude 3 Opus',
     endpoint: 'api.sideid.tech/v1/ai/claude-3-opus',
     method: 'POST',
     category: 'Claude',
+    active: true,
   },
   {
     title: 'GPT 4o Mini',
     endpoint: 'api.sideid.tech/v1/ai/gpt-4o-mini',
     method: 'POST',
     category: 'GPT',
+    active: true,
   },
   {
     title: 'GPT 4o',
     endpoint: 'api.sideid.tech/v1/ai/gpt-4o',
     method: 'POST',
     category: 'GPT',
+    active: true,
   },
   {
     title: 'Gemini 1.5 Pro',
     endpoint: 'api.sideid.tech/v1/ai/gemini-1.5-pro',
     method: 'POST',
     category: 'Gemini',
+    active: true,
   },
   {
     title: 'Gemini 1.5 Flash',
     endpoint: 'api.sideid.tech/v1/ai/gemini-1.5-flash',
     method: 'POST',
     category: 'Gemini',
+    active: false,
   },
 ];
 
@@ -80,14 +89,16 @@ const defaultInputBody = {
     },
     {
       role: 'user',
-      content: 'Halo, apa kabar, kamu siapa?',
+      content: 'Halo, apa kabar?',
     },
   ],
 };
 
 export default function AIServicePage() {
   const { toast } = useToast();
-  const [selectedEndpoint, setSelectedEndpoint] = useState(aiEndpoints[0]);
+  const [selectedEndpoint, setSelectedEndpoint] = useState(
+    aiEndpoints.find((endpoint) => endpoint.active) || aiEndpoints[0],
+  );
   const [inputBody, setInputBody] = useState(
     JSON.stringify(defaultInputBody, null, 2),
   );
@@ -118,13 +129,13 @@ export default function AIServicePage() {
     navigator.clipboard.writeText(text);
     toast({
       title: 'Tersalin ke clipboard',
-      description: 'Teksnya udah tersalin ke clipboard kamu.',
+      description: 'Teksnya udah disalin ke clipboard kamu.',
     });
   };
 
-  const categories = Array.from(
-    new Set(aiEndpoints.map((endpoint) => endpoint.category))
-  );
+  const categories = [
+    ...Array.from(new Set(aiEndpoints.map((endpoint) => endpoint.category))),
+  ];
 
   return (
     <div className='container mx-auto px-4 py-8'>
@@ -163,9 +174,24 @@ export default function AIServicePage() {
                     .map((endpoint) => (
                       <DropdownMenuItem
                         key={endpoint.title}
-                        onSelect={() => setSelectedEndpoint(endpoint)}
+                        onSelect={() =>
+                          endpoint.active && setSelectedEndpoint(endpoint)
+                        }
+                        disabled={!endpoint.active}
+                        className={
+                          !endpoint.active
+                            ? 'opacity-50 cursor-not-allowed'
+                            : ''
+                        }
                       >
-                        {endpoint.title}
+                        <span className='flex items-center justify-between w-full'>
+                          {endpoint.title}
+                          <Badge
+                            variant={endpoint.active ? 'default' : 'secondary'}
+                          >
+                            {endpoint.active ? 'Active' : 'Inactive'}
+                          </Badge>
+                        </span>
                       </DropdownMenuItem>
                     ))}
                 </DropdownMenuContent>
@@ -178,7 +204,14 @@ export default function AIServicePage() {
               <p className='text-sm text-muted-foreground mb-2'>
                 Endpoint: {selectedEndpoint.endpoint}
               </p>
-              <Badge>{selectedEndpoint.method}</Badge>
+              <div className='flex items-center gap-2'>
+                <Badge>{selectedEndpoint.method}</Badge>
+                <Badge
+                  variant={selectedEndpoint.active ? 'default' : 'secondary'}
+                >
+                  {selectedEndpoint.active ? 'Active' : 'Inactive'}
+                </Badge>
+              </div>
             </div>
             <div className='space-y-4'>
               <div>
@@ -207,7 +240,10 @@ export default function AIServicePage() {
                   </Button>
                 </div>
               </div>
-              <Button onClick={handleTest} disabled={isLoading}>
+              <Button
+                onClick={handleTest}
+                disabled={isLoading || !selectedEndpoint.active}
+              >
                 {isLoading ? 'Testing...' : 'Test Endpoint'}
               </Button>
               {result && (
